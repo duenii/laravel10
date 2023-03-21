@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
 
 class BannerController extends Controller
 {
@@ -13,9 +16,9 @@ class BannerController extends Controller
      */
     public function index()
     {
-        $data_baner = Banner::latest()->paginate(5);
-
-        return view('auth.banner.index', compact('data_baner'))->with('i', (request()->input('page', 1) - 1) * 5);
+        $banner = Banner::all();
+        //return $Banners;
+        return view('auth.banner.index', compact('banner'));
     }
 
     /**
@@ -23,7 +26,8 @@ class BannerController extends Controller
      */
     public function create()
     {
-        return view('create');
+       
+        return view('auth.banner.create');
     }
 
     /**
@@ -31,72 +35,57 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name'          =>  'required',
-            'status'         =>  'required|email|unique:banners',
-            'image'         =>  'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048|dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000'
-        ]);
+        try{
+            if($request->has('file')){
+                $file = $request->file;
+                $fileName = time(). $file->getClientOriginalName();
+    
+                $imgePath = public_path('/images/banners');
+                $file->move($imgePath, $fileName);
+    
+            }
+            Banner::create([
+               
+                'name' => $request->name,
+                'status' => $request->status,
+                'image' => $fileName
+    
+            ]);
+        }
+        catch(\Exception $ex){
+            dd($ex->getMessage());
 
-        $file_name = time() . '.' . request()->image->getClientOriginalExtension();
+        }
 
-        request()->image->move(public_path('images/banners'), $file_name);
-
-        $banner = new Banner;
-
-        $banner->name = $request->name;
-        $banner->status = $request->status;
-        $banner->image = $file_name;
-
-        $banner->save();
-
-        return to_route('banners.index')->with('success', 'Banner Added successfully.');
+       //$request->session()->flash('alert-success', 'Banner Created Successfully');
+       //$request->session()->flash('status', 'Task was successful!');
+       
+       return to_route('banner.index');
+       
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Banner $banner)
+    public function show(string $id)
     {
-        return view('show', compact('data_baner'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Banner $banner)
+    public function edit(string $id)
     {
-        return view('edit', compact('data_baner'));
+        return view('edit', compact('Banners'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Banner $banner)
+    public function update(Request $request, string $id)
     {
-        $request->validate([
-            'name'      =>  'required',
-            'status'     =>  'required|email',
-            'image'     =>  'image|mimes:jpg,png,jpeg,gif,svg|max:2048|dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000'
-        ]);
-
-        $image = $request->hidden_image;
-
-        if($request->image != '')
-        {
-            $file_name = time() . '.' . request()->image->getClientOriginalExtension();
-
-            request()->image->move(public_path('images/banners'), $file_name);
-        }
-
-        $banner = Banner::find($request->hidden_id);
-
-        $banner->name = $request->name;
-        $banner->status = $request->status;
-        $banner->image = $file_name;
-
-        $banner->save();
-
-        return to_route('banners.index')->with('success', 'Banner Data has been updated successfully');
+      
     }
 
     /**
@@ -104,8 +93,9 @@ class BannerController extends Controller
      */
     public function destroy(Banner $banner)
     {
-        $banner->delete();
-
-        return to_route('banners.index')->with('success', 'banners Data deleted successfully');
+        //dd($id);
+         $banner->delete();
+         return to_route('banner.index')->with('success', 'Banners Data deleted successfully');
     }
+        
 }

@@ -18,7 +18,7 @@ class PostController extends Controller
     {
         $posts = Post::with('gallery', 'category')->get();
         //return $posts;
-        return view('auth.posts.index', ['posts'=> $posts]);
+        return view('auth.posts.index', compact('posts'));
     }
 
     /**
@@ -40,7 +40,7 @@ class PostController extends Controller
                 $file = $request->file;
                 $fileName = time(). $file->getClientOriginalName();
     
-                $imgePath = public_path('images/posts');
+                $imgePath = public_path('/images/posts');
                 $file->move($imgePath, $fileName);
     
                 $gellery = Gallery::create([
@@ -57,7 +57,7 @@ class PostController extends Controller
             ]);
         }
         catch(\Exception $ex){
-            dd($ex->getMessage());
+            //dd($ex->getMessage());
 
         }
 
@@ -81,7 +81,7 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('edit', compact('posts'));
     }
 
     /**
@@ -89,14 +89,16 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+      
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return to_route('posts.index')->with('success', 'posts Data deleted successfully');
     }
 }
