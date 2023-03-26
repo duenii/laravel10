@@ -5,7 +5,7 @@
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title"> Add Form PostNews </h3>
+            <h3 class="page-title"> Edit Form PostNews </h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Forms</a></li>
@@ -36,22 +36,23 @@
                         @endif
 
 
-                        <form method="post" action="{{ route('posts.store') }}" class="forms-sample" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('posts.update', $post->id) }}" class="forms-sample" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             <div class="form-group row">
-                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">tatle</label>
+                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">title</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="title" class="form-control" id="exampleInputUsername2" placeholder="Title" value="{{ old('title')}}" require>
+                                    <input type="text" name="title" class="form-control" id="exampleInputUsername2" placeholder="Title" value="{{ $post->title }}" require>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="exampleFormControlSelect3" class="col-sm-3 col-form-label">type postnews</label>
                                 <div class="col-sm-9">
-                                    <select class="form-control form-control-sm" name="category" id="exampleFormControlSelect3" require>
+                                    <select class="form-control form-control-sm" name="category_id" id="exampleFormControlSelect3" require>
                                         <option selected>เลือกประเภทข่าว</option>
                                         @if (count($category) > 0)
                                         @foreach($category as $cat_row)
-                                        <option @selected( old('category')== $cat_row->id ) value="{{ $cat_row->id }}">{{ $cat_row->name }}</option>
+                                        <option @selected( $post->category_id == $cat_row->id ) value="{{ $cat_row->id }}">{{ $cat_row->name }}</option>
 
                                         @endforeach
 
@@ -64,13 +65,16 @@
                                 <label for="exampleInputEmail2" class="col-sm-3 col-form-label">File upload</label>
                                 <div class="col-sm-9">
                                     <input type="file" name="file" class="form-control file-upload-info" require>
+                                     <label for="exampleInputEmail2" class="col-sm-12 col-form-label">{{ $post->gallery->image }}</label> 
+                                    <img src="{{ asset('/images/posts').'/'. $post->gallery->image }}" alt="images" width="150px">
                                 </div>
+                                
                             </div>
 
                             <div class="form-group row">
                                 <label for="exampleTextarea1" class="col-sm-3 col-form-label">content</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" name="content" id="summernote" require> {{ old('content') }} </textarea>
+                                    <textarea class="form-control" name="content" id="summernote" require> {{ $post->content }} </textarea>
                                 </div>
                             </div>
 
@@ -80,8 +84,8 @@
                                     <select class="form-control form-control-sm" name="publish" id="exampleFormControlSelect3" require>
                                         <option selected>เลือกสถานะข่าว</option>
                                        
-                                        <option @selected( old('publish')== 1) value="1">แสดง</option>
-                                        <option @selected( old('publish')== 2) value="2">ไม่แสดง</option>
+                                        <option @selected( $post->publish == 1) value="1">แสดง</option>
+                                        <option @selected( $post->publish == 2) value="2">ไม่แสดง</option>
                                         
                                     </select>
                                 </div>

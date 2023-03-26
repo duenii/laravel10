@@ -9,6 +9,8 @@ class Post extends Model
 {
     use HasFactory;
 
+
+
     protected $fillable = ['title','category_id','content','publish', 'gallery_id'];
 
     public function gallery(){

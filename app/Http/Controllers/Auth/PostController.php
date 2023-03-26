@@ -79,17 +79,35 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Post $post)
     {
-        return view('edit', compact('posts'));
+        //dd($post);
+        $cat = Category::all();
+        return view('auth.posts.edit', compact('post','cat'),['category' => $cat]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Post $post)
     {
       
+            if($request->has('file')){
+                $file = $request->file;
+                $fileName = time(). $file->getClientOriginalName();
+    
+                $imgePath = public_path('/images/posts');
+                $file->move($imgePath, $fileName);
+    
+                //$gellery = Gallery::create([
+                 //   'image' => $fileName
+                //]);
+                Gallery::where('id',$post->gallery->id)->update(['image' => $fileName]);
+            }
+           
+            $post->update($request->all());
+            // dd($request->all());
+            return to_route('posts.index')->with('success', 'posts Data Update successfully');
     }
 
     /**

@@ -7,6 +7,7 @@ use App\Http\Controllers\DataAboutController;
 use App\Http\Controllers\MenuServiceController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WebsiteController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 /*
@@ -20,8 +21,16 @@ use App\Models\User;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('website.index');
+// });
+
+Route::get('/', [WebsiteController::class, 'home'])->name('home');
+Route::get('/posts/{id}', [WebsiteController::class, 'show'])->name('website.posts.show');
+
+
+Route::get('/post', function () {
+    return view('website.posts.index');
 });
 
 Route::get('/main', function () {
