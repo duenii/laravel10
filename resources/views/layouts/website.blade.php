@@ -195,6 +195,8 @@
     =====================================-->
     <script src="{{ asset('assets/website/plugins/jquery/jquery.js') }}"></script>
     <script src="{{ asset('assets/website/plugins/bootstrap/bootstrap.min.js') }}"></script>
+	<script src="{{ asset('assets/website/plugins/bootstrap/util.js') }}"></script>
+	<script src="{{ asset('assets/website/plugins/bootstrap/carousel.js') }}"></script>
     <script src="{{ asset('assets/website/plugins/slick-carousel/slick/slick.min.js') }}"></script>
     <script src="{{ asset('assets/website/plugins/shuffle/shuffle.min.js') }}"></script>
 

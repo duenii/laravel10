@@ -113,7 +113,7 @@
             </li> 
             
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('about') }}">
+              <a class="nav-link" href="{{ url('/auth/postabouts') }}">
                 <span class="menu-title">ข้อมูลหน่วยงาน</span>
                 <i class="mdi mdi-format-list-bulleted menu-icon"></i>
               </a>

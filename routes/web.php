@@ -3,9 +3,10 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\PostController;
 use App\Http\Controllers\Auth\BannerController;
+use App\Http\Controllers\Auth\PostAboutController;
+use App\Http\Controllers\Auth\SubAboutController;
 use App\Http\Controllers\DataAboutController;
 use App\Http\Controllers\MenuServiceController;
-use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebsiteController;
 use Illuminate\Support\Facades\Route;
@@ -52,6 +53,10 @@ Route::middleware('auth')->group(function () {
     
     Route::resource('/auth/posts', PostController::class);
     Route::resource('/auth/banner', BannerController::class);
+    Route::resource('/auth/postabouts', PostAboutController::class);
+    Route::resource('/auth/subabouts', SubAboutController::class);
+
+
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
     Route::get('/about', [DataAboutController::class, 'index'])->name('about');
     Route::get('/service', [MenuServiceController::class, 'index'])->name('service');

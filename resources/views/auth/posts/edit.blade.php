@@ -1,4 +1,4 @@
-@extends('layouts.home');
+@extends('layouts.home')
 
 @section('tatle', 'Create Post News')
 @section('content')

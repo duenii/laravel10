@@ -6,48 +6,46 @@
 	<div class="container-fluid pad-cont">
 	  <div class="row">
 		<div class="col-xl-9 col-lg-9 col-md-9 col-xs-12 mb-5">
+
+			
 		 
 			<section class="banner">
-		
-				<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+				<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 					<ol class="carousel-indicators">
-					  <li data-target="#carouselExampleCaptions" data-slide-to="0" class=""></li>
-					  <li data-target="#carouselExampleCaptions" data-slide-to="1" class="active"></li>
-					  <li data-target="#carouselExampleCaptions" data-slide-to="2" class=""></li>
+					  <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+					  <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+					  <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 					</ol>
 					<div class="carousel-inner">
+						======{{ $banners->max('id');}}
+						@foreach ($banners as $ban)
+						@if($ban->id == $banners->max('id'))         
+							<div class="carousel-item active">         
+						@else
+							<div class="carousel-item">       
+						@endif
+					  
+						<img class="d-block w-100" src="{{ asset( '/images/banners/'.$ban->image) }}" alt="First slide">
+						
+					  </div>
+					  @endforeach
+					  {{-- <div class="carousel-item">
+						<img class="d-block w-100" src="{{ asset( '/ images/banners/1679412544305134093_7938415632896783_843174644775038510_n.jpg') }}" alt="Second slide">
+					  </div>
 					  <div class="carousel-item">
-						<img class="d-block w-100 " data-src="holder.js/800x400?auto=yes&amp;bg=777&amp;fg=555&amp;text=First slide" alt="First slide [800x400]" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_18713a6dcb6%20text%20%7B%20fill%3A%23555%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_18713a6dcb6%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22285.9140625%22%20y%3D%22217.7%22%3EFirst%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
-						<div class="carousel-caption d-none d-md-block">
-						  <h5>First slide label</h5>
-						  <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-						</div>
-					  </div>
-					  <div class="carousel-item active">
-						<img class="d-block w-100" data-src="holder.js/800x400?auto=yes&amp;bg=666&amp;fg=444&amp;text=Second slide" alt="Second slide [800x400]" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_18713a6dcb8%20text%20%7B%20fill%3A%23444%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_18713a6dcb8%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23666%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22247.3125%22%20y%3D%22217.7%22%3ESecond%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
-						<div class="carousel-caption d-none d-md-block">
-						  <h5>Second slide label</h5>
-						  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-						</div>
-					  </div>
-					  <div class="carousel-item">
-						<img class="d-block w-100" data-src="holder.js/800x400?auto=yes&amp;bg=555&amp;fg=333&amp;text=Third slide" alt="Third slide [800x400]" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_18713a6dcba%20text%20%7B%20fill%3A%23333%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_18713a6dcba%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23555%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22276.9921875%22%20y%3D%22217.7%22%3EThird%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
-						<div class="carousel-caption d-none d-md-block">
-						  <h5>Third slide label</h5>
-						  <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-						</div>
-					  </div>
+						<img class="d-block w-100" src="{{ asset( 'assets/website/images/service/service-3.jpg') }}" alt="Third slide">
+					  </div> --}}
 					</div>
-					<a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+					<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
 					  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
 					  <span class="sr-only">Previous</span>
 					</a>
-					<a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+					<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
 					  <span class="carousel-control-next-icon" aria-hidden="true"></span>
 					  <span class="sr-only">Next</span>
 					</a>
 				  </div>
-				
+		
 		
 			</section>
 
@@ -89,14 +87,14 @@
 				
 				
 			</div>
-
+			@foreach ($cat as $catx)
 			<div class="row">
 				<div class="col-lg-12 col-md-12 col-sm-12">
-					<h3 class="mt-4 mb-1">ประชุม/อบรม</h3>
+					<h3 class="mt-4 mb-1">{{$catx->name}} </h3>
 					<div class="divider my-2"></div>
 				</div>
 
-				@foreach ($posts as $row)
+				@foreach ($posts->Where('category_id', $catx->id) as $row)
 		
 				<div class="col-lg-4 col-md-6 col-sm-12">
 					<div class="thumbnail">
@@ -110,16 +108,17 @@
 				</div>
 				@endforeach
 			</div>
+			@endforeach
 				
-			<div class="row">
+			{{-- <div class="row">
 				<div class="col-lg-12 col-md-12 col-sm-12">
-					<h3 class="mt-4 mb-1">กิจกรรมหน่วยงาน</h3>
+					<h3 class="mt-4 mb-1">แบนเนอร์</h3>
 					<div class="divider my-2"></div>
 				</div>
-
+				@foreach ($banners as $ban)
 				<div class="col-lg-4 col-md-6 col-sm-12">
 					<div class="service-block mb-1">
-						<img src="{{ asset( 'assets/website/images/service/service-3.jpg') }}" alt="" class="img-fluid">
+						<img src="{{ asset('/images/banners/'.$ban->image) }}" alt="images" class="img-fluid">
 						<div class="content title-color">
 							
 							<p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
@@ -128,6 +127,7 @@
 						</div>
 					</div>
 				</div>
+				@endforeach
 			</div>
 
 			<div class="row">
@@ -147,7 +147,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> --}}
 
 		</div>
 

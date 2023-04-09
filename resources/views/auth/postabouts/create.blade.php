@@ -1,15 +1,15 @@
 @extends('layouts.home')
 
-@section('tatle', 'Create Post News')
+@section('tatle', 'Create Postabouts')
 @section('content')
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title"> Add Form PostNews </h3>
+            <h3 class="page-title"> Add Form Postabouts </h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Forms</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Form PostNews</li>
+                    <li class="breadcrumb-item active" aria-current="page">Form Postabouts</li>
                 </ol>
             </nav>
         </div>
@@ -18,7 +18,7 @@
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Create PostNews </h4>
+                        <h4 class="card-title">Create Postabouts </h4>
                         @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
@@ -36,7 +36,7 @@
                         @endif
 
 
-                        <form method="post" action="{{ route('posts.store') }}" class="forms-sample" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('subabouts.store') }}" class="forms-sample" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group row">
                                 <label for="exampleInputUsername2" class="col-sm-3 col-form-label">tatle</label>
@@ -45,45 +45,16 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="exampleFormControlSelect3" class="col-sm-3 col-form-label">type postnews</label>
+                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">tatle</label>
                                 <div class="col-sm-9">
-                                    <select class="form-control form-control-sm" name="category" id="exampleFormControlSelect3" require>
-                                        <option selected>เลือกประเภทข่าว</option>
-                                        @if (count($category) > 0)
-                                        @foreach($category as $cat_row)
-                                        <option @selected( old('category')== $cat_row->id ) value="{{ $cat_row->id }}">{{ $cat_row->name }}</option>
-
-                                        @endforeach
-
-                                        @endif
-                                    </select>
+                                    <input type="text" name="link" class="form-control" id="exampleInputUsername2" placeholder="link" value="{{ old('link')}}" require>
                                 </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="exampleInputEmail2" class="col-sm-3 col-form-label">File upload</label>
-                                <div class="col-sm-9">
-                                    <input type="file" name="file" class="form-control file-upload-info" require>
-                                </div>
-                            </div>
+                            </div>                       
 
                             <div class="form-group row">
                                 <label for="exampleTextarea1" class="col-sm-3 col-form-label">content</label>
                                 <div class="col-sm-9">
                                     <textarea class="form-control" name="content" id="summernote" require> {{ old('content') }} </textarea>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="exampleFormControlSelect3" class="col-sm-3 col-form-label"> Published</label>
-                                <div class="col-sm-9">
-                                    <select class="form-control form-control-sm" name="publish" id="exampleFormControlSelect3" require>
-                                        <option selected>เลือกสถานะข่าว</option>
-                                       
-                                        <option @selected( old('publish')== 1) value="1">แสดง</option>
-                                        <option @selected( old('publish')== 2) value="2">ไม่แสดง</option>
-                                        
-                                    </select>
                                 </div>
                             </div>
 
